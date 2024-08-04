@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1> Minha Lista de Tarefas</h1>
+        <input type="text" id="taskInput" placeholder="Adicione uma tarefa...">
+        <label for="taskDescriptionInput">Descrição da Tarefa:</label>
+        <input type="text" id="taskDescriptionInput" placeholder="Descreva a tarefa...">
+        <label for="startDateInput">Insira a data de início da tarefa:</label>
+        <input type="date" id="startDateInput">
+        <label for="endDateInput">Insira a data de conclusão da tarefa:</label>
+        <input type="date" id="endDateInput">
+        <button onclick="addTask()">Adicionar</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <!-- Formulário de Edição -->
+    <div id="editForm" class="edit-form" style="display: none;">
+        <h2>Editar Tarefa</h2>
+        <input type="text" id="editTaskInput" placeholder="Editar tarefa...">
+        <input type="text" id="editTaskDescriptionInput" placeholder="Descreva a tarefa...">
+        <label for="editStartDateInput">Insira a data de início da tarefa:</label>
+        <input type="date" id="editStartDateInput">
+        <label for="editEndDateInput">Insira a data de conclusão da tarefa:</label>
+        <input type="date" id="editEndDateInput">
+        <button onclick="saveEdit()">Salvar</button>
+        <button onclick="cancelEdit()">Cancelar</button>
+    </div>
+</body>
+</html>

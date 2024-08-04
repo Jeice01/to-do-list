@@ -1,0 +1,72 @@
+JavaScript
+const taskList = document.getElementById("taskList");
+const taskInpunt = document.getElementById("taskInput");
+const startDateInput = document.getElementById("startDateInput");
+const endDateInput = document.getElementById("endDateInput");
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear()).slice(-2);
+    return `${day}/${month}/${year}`;
+}
+
+function getDateStatus(endDate) {
+    const today = new Date();
+    const end = new Date(endDate);
+    if (end.toDateString() === today.toDateString()) {
+        return 'today';
+    } else if (end < today) {
+        return 'overdue';
+    } else {
+        return '';
+    }
+}
+
+function addTask() {
+    const taskText = taskInpunt.value.trim();
+    const startDate = startDateInput.value;
+    const endDate = endDateInput.value;
+
+    if(taskText !== ""){
+        const formattedStartDate = startDate ? formatDate(startDate) : '';
+        const formattedEndDate = endDate ? formatDate(endDate) : '';
+        const dateStatus = endDate ? getDateStatus(endDate) : '';
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <div class="task-content">
+                <span class="task-text">${taskText}</span>
+                <span class="task-date">Início: ${formattedStartDate}</span>
+                <span class="task-date">Conclusão: ${formattedEndDate}</span>
+            </div>
+            <div class="task-actions">
+                <button class="editButton" onClick="editTask(this)">Editar</button>
+                <button class="deleteButton" onClick="deleteTask(this)">Remover</button>
+            </div>
+        `;
+        taskList.appendChild(li);
+        taskInpunt.value = "";
+        startDateInput.value = "";
+        endDateInput.value = "";
+    }
+}
+
+
+function editTask(button) {
+    const li = button.parentElement;
+    const span = li.querySelector("span");
+    const newText = prompt("Editar tarefas:", span.textContent);
+    if( newText !== null && newText.trim() !== ""){
+        span.textContent = newText.trim();
+    }
+}
+
+function deleteTask(button){
+    const li = button.parentElement;
+    taskList.removeChild(li);
+}
+
+
+
